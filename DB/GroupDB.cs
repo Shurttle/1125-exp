@@ -9,7 +9,6 @@ namespace ConsoleApp5.DB
 
         public GroupDB()
         {
-            //load file (json) 
             if (!File.Exists("group.json"))
                 groups = new Dictionary<string, Group>();
             else
@@ -57,7 +56,6 @@ namespace ConsoleApp5.DB
 
         void Save()
         {
-            // save file (json) 
             using (FileStream fs = new FileStream("group.json", FileMode.OpenOrCreate))
             {
                 JsonSerializer.Serialize(fs, groups);

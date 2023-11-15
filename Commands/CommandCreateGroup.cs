@@ -13,7 +13,7 @@ class CommandCreateGroup : CommandStudent
     {
         Console.WriteLine("Создание группы чурок");
         Group newgroup = groupDB.Create();
-        Console.WriteLine("Укажите имя чурки");
+        Console.WriteLine("Укажите название аула чурок");
         newgroup.Name = Console.ReadLine();
         if (groupDB.Update(newgroup))
             Console.WriteLine("группа чурок создана");

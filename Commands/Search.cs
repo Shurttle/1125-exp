@@ -15,10 +15,12 @@ namespace ConsoleApp5.Commands
         }
         public override void Execute()
         {
-            Console.WriteLine("Поиск студента...");
-            Console.WriteLine("Введите номер студента:");
-            String id = Console.ReadLine();
-            List<Student> students = studentDB.Search(id);
+            Console.WriteLine("поиск чурки");
+            List<Student> students = studentDB.Search(Console.ReadLine());
+            for (int j =  0; j < students.Count; j++) 
+            {
+                Console.WriteLine($"{students[j].LastName}{students[j].FirstName}{students[j].UID} ");
+            }
         }
     }
 }

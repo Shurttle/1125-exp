@@ -6,20 +6,39 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp5.Commands
 {
-    class Edit : CommandStudent
-    {
-        private StudentDB studentDB;
+  
+    
+        internal class CommandsEdit : CommandStudent
+        {
+            private StudentDB studentDB;
+            public CommandsEdit(StudentDB studentDB)
+            {
+                this.studentDB = studentDB;
+            }
+            public override void Execute()
+            {
 
-        public Edit(StudentDB studentDB)
-        {
-            this.studentDB = studentDB;
-        }
-        public override void Execute()
-        {
-            Console.WriteLine("Редактирвание студента...");
-            Console.WriteLine("Введите номер студента:");
-            String id = Console.ReadLine(); 
-            List<Student> students = studentDB.Search(id);
+                Console.WriteLine("Редактирование студента");
+                List<Student> students = studentDB.Search("");
+                int k = 0;
+                foreach (var item in students)
+                {
+                    Console.WriteLine($"{k++}) {item.FirstName}{item.LastName}");
+                }
+                Console.WriteLine("Введите номер чурки");
+                int id = int.Parse(Console.ReadLine());
+                Console.WriteLine("Новое имя чурки?");
+                students[id].FirstName = Console.ReadLine();
+                Console.WriteLine("Новая фамилия чурки?");
+                students[id].LastName = Console.ReadLine();
+                if (studentDB.Update(students[id]))
+                {
+                    Console.WriteLine("Изменения успешны");
+                }
+
+
+                else
+                    Console.WriteLine("Произошла ошибка");
+            }
         }
     }
-}

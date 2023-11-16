@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp5.Commands
 {
-     class Search : CommandStudent
+     class CommandSearchStudent : CommandStudent
     {
         private StudentDB studentDB;
-        public Search(StudentDB studentDB)
+        public CommandSearchStudent(StudentDB studentDB)
         {
             this.studentDB = studentDB;
         }

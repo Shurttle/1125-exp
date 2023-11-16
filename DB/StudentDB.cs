@@ -16,7 +16,7 @@ class StudentDB
             {
                 students = JsonSerializer.Deserialize<Dictionary<string, Student>>(file);
             }
-        
+
     }
 
     public List<Student> Search(string text)
@@ -42,7 +42,7 @@ class StudentDB
 
     public Student Create()
     {
-        Student newStudent = new Student {  UID = Guid.NewGuid().ToString()};
+        Student newStudent = new Student { UID = Guid.NewGuid().ToString() };
         students.Add(newStudent.UID, newStudent);
         return newStudent;
     }
@@ -55,6 +55,8 @@ class StudentDB
         Save();
         return true;
     }
+
+
 
     void Save()
     {

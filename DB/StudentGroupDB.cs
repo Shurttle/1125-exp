@@ -1,42 +1,59 @@
 ﻿//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
-using System.Text.Json;
+using ConsoleApp5.DB;
+using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace ConsoleApp5.DB
-{
 class StudentGroupDB
+{
+    private StudentDB studentDB;
+    private GroupDB groupDB;
+
+    private Dictionary<string, string> studentGroupMap;
+    private Dictionary<string, List<string>> groupStudentMap;
+
+    public StudentGroupDB(StudentDB studentDB, GroupDB groupDB)
     {
-        Dictionary<string, string> groupsToStudent = new Dictionary<string, string>();
-        Dictionary<string, List<string>> studentsToGroup = new Dictionary<string, List<string>>();        
-        private StudentDB studentDB;
-        private GroupDB groupDB;
-        public StudentGroupDB(StudentDB studentDB, GroupDB groupDB)
+        this.studentDB = studentDB;
+        this.groupDB = groupDB;
+        studentGroupMap = new Dictionary<string, string>();
+        groupStudentMap = new Dictionary<string, List<string>>();
+    }
+
+    public void AddStudentToGroup()
+    {
+        Console.Write("Введите UID студента:\t");
+        Student studentUID = studentDB.GetByID(Console.ReadLine());
+        if (studentUID == null)
         {
-            this.studentDB = studentDB;
-            this.groupDB = groupDB;
+            Console.WriteLine("Такого студента не существует! :(");
+            return;
         }
-        public void ConnectToGroup(Student student, Group group)
+        Console.Write("Введите UID студента:\t");
+        Group groupUID = groupDB.GetByID(Console.ReadLine());
+        if (groupUID == null)
         {
-            groupsToStudent.Add(student.UID, group.UID);
-            if (studentsToGroup.ContainsKey(student.UID))
-            {
-                studentsToGroup[group.UID].Add(student.UID);
-            }
-            else
-            {
-                studentsToGroup.Add(group.UID, new List<string> { student.UID });
-            }
+            Console.WriteLine("Такой группы не существует! :(");
+            return;
         }
-            public Group GetGroup(Student student)
-            {
-            string UIDgroup = groupsToStudent[student.UID];
-            List<Group> groupList = groupDB.Search("");
-            foreach (var group in groupList)
-            {
-                
-            }
+        if (!studentGroupMap.ContainsKey(studentUID.UID))
+        {
+            studentGroupMap.Add(studentUID.UID, groupUID.UID);
         }
+        else
+        {
+            // если студент уже добавлен, но мы хотим его перевести в другую группу
+            string uidG = studentGroupMap[studentUID.UID];
+            groupStudentMap[uidG].Remove(studentUID.UID);
+            studentGroupMap[studentUID.UID] = groupUID.UID;
+        }
+        if (!groupStudentMap.ContainsKey(groupUID.UID))
+        {
+            groupStudentMap.Add(groupUID.UID, new List<string>(new string[] { studentUID.UID }));
+        }
+        else
+        {
+            groupStudentMap[groupUID.UID].Add(studentUID.UID);
         }
     }
 }
-

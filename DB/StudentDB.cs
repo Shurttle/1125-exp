@@ -65,4 +65,11 @@ class StudentDB
         
         // save file (json)
     }
+
+    public Student GetByID(string uid)
+    {
+        if (!students.ContainsKey(uid))
+            return null;
+        return students[uid];
+    }
 }

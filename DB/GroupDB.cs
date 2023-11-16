@@ -61,6 +61,14 @@ namespace ConsoleApp5.DB
                 JsonSerializer.Serialize(fs, groups);
             }
         }
+
+        public Group GetByID(string uid)
+        {
+            if (!groups.ContainsKey(uid))
+                return null;
+            return groups[uid];
+        }
+
     }
 
 }

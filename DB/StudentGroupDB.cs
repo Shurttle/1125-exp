@@ -42,6 +42,7 @@ class StudentGroupDB
         }
         else
         {
+
             string uidG = studentGroupMap[studentUID.UID];
             groupStudentMap[uidG].Remove(studentUID.UID);
             studentGroupMap[studentUID.UID] = groupUID.UID;

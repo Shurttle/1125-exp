@@ -42,7 +42,6 @@ class StudentGroupDB
         }
         else
         {
-            // если студент уже добавлен, но мы хотим его перевести в другую группу
             string uidG = studentGroupMap[studentUID.UID];
             groupStudentMap[uidG].Remove(studentUID.UID);
             studentGroupMap[studentUID.UID] = groupUID.UID;

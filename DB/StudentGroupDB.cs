@@ -22,14 +22,14 @@ class StudentGroupDB
 
     public void AddStudentToGroup()
     {
-        Console.Write("Введите UID студента:\t");
+        Console.Write("Введите UID студента:");
         Student studentUID = studentDB.GetByID(Console.ReadLine());
         if (studentUID == null)
         {
             Console.WriteLine("Такого студента не существует! :(");
             return;
         }
-        Console.Write("Введите UID студента:\t");
+        Console.Write("Введите UID студента:");
         Group groupUID = groupDB.GetByID(Console.ReadLine());
         if (groupUID == null)
         {

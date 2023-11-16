@@ -16,7 +16,7 @@ class Program
         commandManager.RegisterCommand("Delete group", new CommandDeleteGroup(groupDB));
         commandManager.RegisterCommand("Delete student", new CommandDeleteStudent(studentDB));
         commandManager.RegisterCommand("Search group", new CommandSearchGroup(groupDB));
-
+        commandManager.RegisterCommand("Edit group", new CommandEditGroup(groupDB));
 
         commandManager.Start();
     }
